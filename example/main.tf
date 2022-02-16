@@ -20,4 +20,3 @@ module "lambda_poweroff" {
     App       = "lambda_poweroff"
   }
 }
-

@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "lambda_policy_doc" {
       "ec2:StopInstances",
       "ec2:StartInstances",
       "ec2:DescribeTags",
-      "ec2:DescribeSpotInstanceRequests"
+      "ec2:DescribeSpotInstanceRequests",
       "rds:ListTagsForResource",
       "rds:DescribeDBClusters",
       "rds:StartDBCluster",
@@ -58,8 +58,8 @@ data "aws_iam_policy_document" "lambda_policy_doc" {
 }
 
 resource "aws_iam_role_policy" "lambda_policy" {
-  name = "${var.base_name}-policy"
-  role = aws_iam_role.lambda_role.id
+  name   = "${var.base_name}-policy"
+  role   = aws_iam_role.lambda_role.id
   policy = data.aws_iam_policy_document.lambda_policy_doc.json
 }
 
@@ -89,7 +89,7 @@ EOF
 resource "aws_cloudwatch_log_group" "lambda_log" {
   name              = "/aws/lambda/${var.base_name}"
   retention_in_days = var.log_retention_days
-  tags = var.extra_tags
+  tags              = var.extra_tags
 }
 
 
