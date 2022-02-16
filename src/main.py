@@ -120,10 +120,7 @@ TIME = {
 def range_region_time(region_name):
     begin_time_s, end_time_s = TIME[region_name]['permitted_execution_time'].split('-')
     tz = TIME[region_name]['utc_offset']
-    if tz.startswith('+'):
-        tz_now = datetime.utcnow() + timedelta(hours=float(tz))
-    else:
-        tz_now = datetime.utcnow() - timedelta(hours=float(tz))
+    tz_now = datetime.utcnow() + timedelta(hours=float(tz))
 
     begin_time = datetime(tz_now.year, tz_now.month,
                           tz_now.day, int(begin_time_s), 0)
