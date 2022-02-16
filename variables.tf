@@ -22,5 +22,5 @@ variable "extra_tags" {
 variable "cloudwatch_schedule_expression" {
   description = "Define the aws cloudwatch event rule schedule expression"
   type        = string
-  default     = "cron(01 * * * * *)"
+  default     = "rate(1 hour)"
 }

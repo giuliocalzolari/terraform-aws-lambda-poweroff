@@ -129,7 +129,7 @@ def range_region_time(region_name):
                           tz_now.day, int(begin_time_s), 0)
     end_time = datetime(tz_now.year, tz_now.month,
                         tz_now.day, int(end_time_s), 0)
-    # print("time {} in region {}".format(tz_now, region_name))
+    print('time {} in region {}'.format(tz_now, region_name))
     if begin_time < tz_now < end_time:
         # print("BETWEEN!")
         return True
@@ -145,12 +145,12 @@ def shutdown_ec2(region):
         Filters=[{'Name': 'instance-state-name', 'Values': ['running']}])
     for instance in instances:
         print('Stopping EC2 {} in region {}'.format(instance.id, region))
-        ec2.instances.stop(instance.id)
+    ec2.instances.stop()
 
 
 def shutdown_rds(region):
     print('searching RDS in region {} - {}'.format(region,TIME[region]['description']))
-    rds = boto3.client('rds')
+    rds = boto3.client('rds', region_name=region)
     instances_rds = rds.describe_db_instances().get('DBInstances', [])
     for instance_rds in instances_rds:
         if instance_rds['DBInstanceStatus'] == 'available':
@@ -165,6 +165,7 @@ def lambda_handler(event, context):
                    for region in boto3.client('ec2').describe_regions()['Regions']]
     for region in ec2_regions:
         if not range_region_time(region):
+
             shutdown_ec2(region)
             shutdown_rds(region)
 
@@ -176,7 +177,7 @@ if __name__ == '__main__':
         'detail': {},
         'detail-type': 'Scheduled Event',
          'source': 'aws.events',
-         'time': '1970-01-01T00:00:00Z',
+         'time': '1370-01-01T00:00:00Z',
          'id': 'cdc73f9d-aea9-11e3-9d5a-835b769c0d9c',
          'resources': ['arn:aws:events:us-east-1:123456789012:rule/my-schedule']
         }

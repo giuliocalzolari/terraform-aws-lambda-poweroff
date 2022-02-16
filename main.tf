@@ -27,6 +27,7 @@ data "aws_iam_policy_document" "lambda_policy_doc" {
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:PutLogEvents",
+      "ec2:DescribeRegions",
       "ec2:DescribeInstances",
       "ec2:DescribeInstances",
       "ec2:DescribeInstanceStatus",

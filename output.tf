@@ -27,7 +27,7 @@ output "lambda_iam_role_arn" {
 
 output "cloudwatch_event_rule_id" {
   description = "Cloudwatch rule ID"
-  value       = aws_cloudwatch_event_rule.cw_rule_lambda.id
+  value       = aws_cloudwatch_event_rule.cw_rule.id
 }
 
 

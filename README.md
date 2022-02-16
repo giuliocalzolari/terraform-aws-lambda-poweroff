@@ -1,9 +1,7 @@
-# AWS Lambda Route 53 Auto CNAME
+# AWS Lambda Poweroff EC2/RDS
 
+This lambda allow to poweroff all EC2 and RDS in a specific time range and with a timezone proper offset for each region
 
-
-## Terraform version
-Module compatible with Terraform `0.12`
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -12,14 +10,14 @@ Module compatible with Terraform `0.12`
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 3.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_archive"></a> [archive](#provider\_archive) | n/a |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 3.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.0 |
 
 ## Modules
 
@@ -44,7 +42,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_base_name"></a> [base\_name](#input\_base\_name) | Application Name | `string` | `"poweroff"` | no |
-| <a name="input_cloudwatch_schedule_expression"></a> [cloudwatch\_schedule\_expression](#input\_cloudwatch\_schedule\_expression) | Define the aws cloudwatch event rule schedule expression | `string` | `"cron(01 * * * * *)"` | no |
+| <a name="input_cloudwatch_schedule_expression"></a> [cloudwatch\_schedule\_expression](#input\_cloudwatch\_schedule\_expression) | Define the aws cloudwatch event rule schedule expression | `string` | `"rate(1 hour)"` | no |
 | <a name="input_extra_tags"></a> [extra\_tags](#input\_extra\_tags) | Additional Tag to add | `map(string)` | n/a | yes |
 | <a name="input_log_retention_days"></a> [log\_retention\_days](#input\_log\_retention\_days) | Cloudwatch Log Retation Days | `number` | `90` | no |
 
